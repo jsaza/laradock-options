@@ -52,6 +52,16 @@ volumes:
     driver: ${VOLUMES_DRIVER}
   react:
     driver: ${VOLUMES_DRIVER}
+  vendor1_volume: # 2022/12/23 https://qiita.com/ucan-lab/items/a88e2e5c2a79f2426163
+  vendor2_volume:
+  vendor3_volume:
+  vendor4_volume:
+  vendor5_volume:
+  node_modules1_volume: # 2022/12/23 https://coffee-nominagara.com/docker-npm-run-serve
+  node_modules2_volume:
+  node_modules3_volume:
+  node_modules4_volume:
+  node_modules5_volume:
 
 services:
 
@@ -183,6 +193,16 @@ services:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
         - docker-in-docker:/certs/client
         - ./php-worker/supervisord.d:/etc/supervisord.d
+        - vendor1_volume:${APP_CODE_PATH_CONTAINER}/dev1/vendor # 2022/12/23 https://qiita.com/ucan-lab/items/a88e2e5c2a79f2426163
+        - vendor2_volume:${APP_CODE_PATH_CONTAINER}/dev2/vendor
+        - vendor3_volume:${APP_CODE_PATH_CONTAINER}/dev3/vendor
+        - vendor4_volume:${APP_CODE_PATH_CONTAINER}/dev4/vendor
+        - vendor5_volume:${APP_CODE_PATH_CONTAINER}/dev5/vendor
+        - node_modules1_volume:${APP_CODE_PATH_CONTAINER}/dev1/node_modules # 2022/12/23 https://coffee-nominagara.com/docker-npm-run-serve
+        - node_modules2_volume:${APP_CODE_PATH_CONTAINER}/dev2/node_modules
+        - node_modules3_volume:${APP_CODE_PATH_CONTAINER}/dev3/node_modules
+        - node_modules4_volume:${APP_CODE_PATH_CONTAINER}/dev4/node_modules
+        - node_modules5_volume:${APP_CODE_PATH_CONTAINER}/dev5/node_modules
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
       ports:
@@ -301,6 +321,11 @@ services:
         - ./php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
         - docker-in-docker:/certs/client
+        - vendor1_volume:${APP_CODE_PATH_CONTAINER}/dev1/vendor # 2022/12/23 https://qiita.com/ucan-lab/items/a88e2e5c2a79f2426163
+        - vendor2_volume:${APP_CODE_PATH_CONTAINER}/dev2/vendor
+        - vendor3_volume:${APP_CODE_PATH_CONTAINER}/dev3/vendor
+        - vendor4_volume:${APP_CODE_PATH_CONTAINER}/dev4/vendor
+        - vendor5_volume:${APP_CODE_PATH_CONTAINER}/dev5/vendor
       expose:
         - "9000"
       extra_hosts:
